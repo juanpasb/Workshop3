@@ -5,8 +5,9 @@ public class ClientServer {
         ClientServer c = new ClientServer();
     }
 
-    private Scanner sc;//Submit info
+    private Scanner scanner;
     private String pets;
+    final String HOST= "127.0.0.1";
 
     private String[] dataPet = new String[]{"1 specie",
             "2 size", "3 city ", "4 Adress",
@@ -17,12 +18,12 @@ public class ClientServer {
 
     ClientServer() {
         pets = "";
-        sc = new Scanner(System.in);
+        scanner = new Scanner(System.in);
 
         System.out.println("Welcome Citizen  ");
         System.out.println("1 if you want to create a case ");
         System.out.println("2 if you want to speak to an agent");
-        int number = sc.nextInt();
+        int number = scanner.nextInt();
 
         if (number == 1) {
 
@@ -38,7 +39,7 @@ public class ClientServer {
             System.out.println("5 Improper handling on public roads");
 
 
-            numberCase = sc.nextInt();
+            numberCase = scanner.nextInt();
 
             if (numberCase < 1 || numberCase > 5) {
                 System.out.println("Error number");
@@ -47,7 +48,7 @@ public class ClientServer {
             for (int i = 0; i < dataPet.length; i++) {
                 System.out.println("complete the following questions :");
                 System.out.println(dataPet[i]);
-                String infox = sc.nextLine();
+                String infox = scanner.nextLine();
                 if (infox.equals("")) {
                     System.out.println("Error");
                     i = i - 1;
@@ -59,7 +60,7 @@ public class ClientServer {
         }
         if (number == 2) {
             var isRunning = false;
-            var port = 4460;
+            var port = 5000;
             do {
                 isRunning = false;
                 try {
@@ -81,3 +82,4 @@ public class ClientServer {
 
 
 }
+

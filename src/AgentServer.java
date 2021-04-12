@@ -1,5 +1,5 @@
-import java.io.*;
 import java.net.*;
+import java.io.*;
 import java.util.concurrent.Executors;
 
 public class AgentServer {
@@ -17,17 +17,20 @@ public class AgentServer {
 
     public static void main(String[] args) throws Exception {
         AgentServer agentServer;
-        var port = 4460;
-       int accountant = 0;
+        var port = 5000;
+        int accountant = 0;
+        String received;
         var pool = Executors.newFixedThreadPool(5);
         Boolean loading ;
+
+
         do {
             loading = false;
             try (var listener = new ServerSocket(port)) {
                 loading = false;
-                System.out.println("Welcome Agent  " + accountant);
-                System.out.println(" You are in the port:" + port);
+                System.out.println("Welcome Agent  ");
                 System.out.println("waiting  an citizen...........Wait");
+
                 while (true) {
                     agentServer = new AgentServer(listener.accept());
                     pool.execute(agentServer.run());
@@ -40,18 +43,19 @@ public class AgentServer {
             } catch (Exception e) {
                 System.out.println("ERROR");
             }
-       } while (loading);
+        } while (loading);
+
     }
 
     public void Information() {
-        String m = "";
+        String info = "";
         try {
             //do {
-            if (m.equals(EXIT)) {
-                m = (String) in.readUTF();
-                message("\nCITIZEN: " + m);
+            if (info.equals(EXIT)) {
+                info = (String) in.readUTF();
+                message("\nCITIZEN: " + info);
                 System.out.print("YOU: ");
-            }while (!m.equals(EXIT));
+            }while (!info.equals(EXIT));
 
         } catch (IOException e) {
         }
@@ -61,6 +65,7 @@ public class AgentServer {
         try {
             in = new DataInputStream(socket.getInputStream());
             out = new DataOutputStream(socket.getOutputStream());
+
             out.flush();
         } catch (IOException e) {
             message("Error route data");
@@ -87,14 +92,14 @@ public class AgentServer {
     public Runnable run() {
 
         var thread = new Thread(new Runnable() {
+            @Override
             public void run() {
                 while (true) {
                     safePrintln("Did a citizen arrive?");
                     safePrintln("1 Accept");
                     safePrintln("2 Deny");
-                    String answer = "";
                     BufferedReader scanner = new BufferedReader(new InputStreamReader(System.in));
-                    
+                    String answer = "";
                     try {
                         System.out.println("Wait a moment");
                         answer = scanner.readLine();
@@ -143,9 +148,37 @@ public class AgentServer {
         }
     }
 
+
     public static void safePrintln(String s) {
         synchronized (System.out) {
             System.out.println(s);
         }
     }
+  /*  try{
+        Scanner reader = new Scanner(System.in);
+        InetAddress ip = InetAddress.getByName("localhost");
+        Socket socket = new Socket(ip,6666);
+        DataInputStream dataIn = new DataInputStream(socket.getInputStream());
+        DataOutputStream dataOut = new DataOutputStream(socket.getOutputStream());
+        while(true){
+            System.out.println(dataIn.readUTF());
+            String toSend = reader.nextLine();
+            dataOut.writeUTF(toSend);
+            if(toSend.equals("Exit")){
+                System.out.println("Closing this connection: " + socket);
+                socket.close();
+                System.out.println("Connection closed!");
+                break;
+            }
+            String received = dataIn.readUTF();
+            System.out.println(received);
+        }
+        reader.close();
+        dataIn.close();
+        dataOut.close();
+    }catch (Exception e){
+        e.printStackTrace();
+    }
+}
+}*/
 }
