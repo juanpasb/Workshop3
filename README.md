@@ -1,5 +1,5 @@
 # Workshop3
-## integrantes
+## Integrantes
 
 Juan Pablo Romero Amado
 
