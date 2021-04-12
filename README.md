@@ -1,9 +1,9 @@
 # Workshop3
 ## Integrantes
 
-Juan Pablo Romero Amado
+-Juan Pablo Romero Amado
 
-Sergio Daniel Gomez Avelino
+-Sergio Daniel Gomez Avelino
 
 **INSTRUCIONES**
 
