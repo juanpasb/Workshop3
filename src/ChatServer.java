@@ -15,7 +15,7 @@ public class ChatServer {
     }
 
     public void executeConnexion() {
-        var hilo = new Thread(new Runnable() {
+        var thread = new Thread(new Runnable() {
 
             public void run() {
                 try {
@@ -31,7 +31,7 @@ public class ChatServer {
                 }
             }
         });
-        hilo.start();
+         thread.start();
     }
 
     public ChatServer(String ip, int port) {
@@ -74,13 +74,13 @@ public class ChatServer {
     }
 
     public void Information() {
-        String m = "";
+        String data = "";
         try {
             do {
-                m = (String) in.readUTF();
-                message("\nAgent: " + m);
+                data = (String) in.readUTF();
+                message("\nAgent: " + data);
                 System.out.print("Citizen: ");
-            } while (!m.equals(Exit));
+            } while (!data.equals(Exit));
 
         } catch (IOException e) {
         }

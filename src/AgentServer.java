@@ -1,5 +1,5 @@
-import java.net.*;
 import java.io.*;
+import java.net.*;
 import java.util.concurrent.Executors;
 
 public class AgentServer {
@@ -87,14 +87,14 @@ public class AgentServer {
     public Runnable run() {
 
         var thread = new Thread(new Runnable() {
-            @Override
             public void run() {
                 while (true) {
                     safePrintln("Did a citizen arrive?");
                     safePrintln("1 Accept");
                     safePrintln("2 Deny");
-                    BufferedReader scanner = new BufferedReader(new InputStreamReader(System.in));
                     String answer = "";
+                    BufferedReader scanner = new BufferedReader(new InputStreamReader(System.in));
+                    
                     try {
                         System.out.println("Wait a moment");
                         answer = scanner.readLine();
